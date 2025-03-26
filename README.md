@@ -72,7 +72,7 @@ Steps
 
 Clone the repository:
 
-git clone <repository_url>
+git clone (https://github.com/Puneeetth/Bynry-Inc.-Project.git)
 cd gas_utility_service
 
 Create and activate a virtual environment:
@@ -111,3 +111,10 @@ Access the application:
 Customer portal: http://127.0.0.1:8000/
 
 Admin panel: http://127.0.0.1:8000/admin/
+Technologies Used
+
+Backend: Django, PostgreSQL
+
+Frontend: HTML, Bootstrap, JavaScript
+
+Authentication: Django built-in authentication
