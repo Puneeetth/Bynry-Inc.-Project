@@ -1,0 +1,59 @@
+{% extends 'service_requests/base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3 class="mb-0">Request Details</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Request Information</h5>
+                <table class="table">
+                    <tr>
+                        <th>Request Type:</th>
+                        <td>{{ request.get_request_type_display }}</td>
+                    </tr>
+                    <tr>
+                        <th>Status:</th>
+                        <td>
+                            <span class="badge {% if request.status == 'pending' %}bg-warning{% elif request.status == 'in_progress' %}bg-primary{% elif request.status == 'resolved' %}bg-success{% else %}bg-secondary{% endif %}">
+                                {{ request.get_status_display }}
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Created:</th>
+                        <td>{{ request.created_at|date:"M d, Y H:i" }}</td>
+                    </tr>
+                    <tr>
+                        <th>Last Updated:</th>
+                        <td>{{ request.updated_at|date:"M d, Y H:i" }}</td>
+                    </tr>
+                    {% if request.resolved_at %}
+                    <tr>
+                        <th>Resolved:</th>
+                        <td>{{ request.resolved_at|date:"M d, Y H:i" }}</td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h5>Description</h5>
+                <p>{{ request.description }}</p>
+                {% if request.attachment %}
+                <h5>Attachment</h5>
+                <a href="{{ request.attachment.url }}" class="btn btn-sm btn-primary" target="_blank">
+                    <i class="fas fa-download"></i> Download Attachment
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'service_requests/base.html' %}
+{% load static %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="col-lg-6 col-md-8">
+        <div class="card shadow-lg border-0 rounded-4">
+            
+            <!-- Logo/Image at the top -->
+            <div class="text-center mt-4">
+                <img src="{% static 'images/logo.png' %}" alt="Service Logo" class="img-fluid w-50" style="max-width: 500px;">
+            </div>
+
+            <div class="card-header bg-primary text-white text-center">
+                <h3 class="mb-0">Submit Service Request</h3>
+            </div>
+
+            <div class="card-body p-4">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="text-danger small mt-1">
+                                    {{ field.errors.0 }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary w-50">Submit</button>
+                        <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary w-50">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
